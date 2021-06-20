@@ -5,13 +5,14 @@
   height: 574px;
   display: flex;
   flex-direction: row;
+  box-sizing: border-box;
+  padding: 75px 70px;
 }
 
 .promo__description {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   box-sizing: content-box;
-  padding: 75px 70px;
   color: #FFF;
 }
 
@@ -58,5 +59,4 @@
   max-width: 310px;
   max-height: 304px;
   width: 100%;
-  margin: 75px 70px 0px 0px;
 }
