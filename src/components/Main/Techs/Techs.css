@@ -4,6 +4,8 @@
   height: 625px;
   box-sizing: border-box;
   padding: 100px 70px;
+  font-style: normal;
+  font-family: Inter;
 }
 
 .techs__title {
@@ -61,4 +63,17 @@
   justify-content: center;
   margin: 0 5px 5px 5px;
   flex-wrap: wrap;
+  transition: all 0.4s ease-out;
+}
+.techs__list-item:hover {
+  background-color: #3DDC84;
+}
+
+.techs__link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.techs__link:hover {
+  cursor: pointer;
 }

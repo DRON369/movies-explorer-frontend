@@ -8,10 +8,11 @@
   padding: 18px 70px;
   margin: 0;
 
-  font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  font-family: Inter;
+  font-style: normal;
 }
 
 .header__logo {
@@ -35,6 +36,12 @@
   text-decoration: none;
   color: #FFF;
   margin: 29px 15px;
+  transition: opacity 0.4s ease-out;
+}
+
+.header__link:hover {
+  cursor: pointer;
+  opacity: 70%;
 }
 
 .header__link_signin {
