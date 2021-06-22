@@ -56,7 +56,7 @@
 
 .promo__link:hover {
   cursor: pointer;
-  opacity: 30%;
+  opacity: 0.3;
 }
 
 .promo__logo {

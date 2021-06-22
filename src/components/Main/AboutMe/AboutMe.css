@@ -77,4 +77,10 @@
 .about-me__link {
   text-decoration: none;
   color: inherit;
+  transition: opacity 0.4s ease-out;
+}
+
+.about-me__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
 }
