@@ -89,3 +89,29 @@
   opacity: 0.8;
   cursor: pointer;
 }
+
+.movies-card__save-button_remove {
+  width: 21px;
+  height: 21px;
+  background-image: url('../../../images/remove-movie.svg');
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.movies-card__save-button_remove:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.movies-card__image:hover+.movies-card__save-button_remove {
+  cursor: pointer;
+  opacity: 1;
+}

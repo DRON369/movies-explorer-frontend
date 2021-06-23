@@ -4,7 +4,12 @@ import React from 'react';
 function MoviesCard(props) {
 
   const isSaved = props.saved;
-  const cardSaveButtonClassName = isSaved ? "movies-card__save-button_saved" : "movies-card__save-button";
+  let cardSaveButtonClassName;
+  if (props.page === 'saved-movies'){
+    cardSaveButtonClassName = 'movies-card__save-button_remove';
+  } else {
+    cardSaveButtonClassName = isSaved ? "movies-card__save-button_saved" : "movies-card__save-button";
+  }
 
   return (
     <li className="movies-card">
