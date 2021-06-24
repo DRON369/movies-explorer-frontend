@@ -81,3 +81,15 @@
   line-height: 16px;
   color: #EE3465;
 }
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding: 230px 20px 70px 20px;
+  }
+  .profile__info {
+    margin-top: 67px;
+  }
+  .profile__links {
+    margin-top: 190px;
+  }
+}

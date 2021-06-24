@@ -46,7 +46,6 @@
   justify-content: center;
   margin-top: 100px;
   padding: 0;
-  flex-wrap: wrap;
 }
 
 .techs__list-item {
@@ -65,6 +64,7 @@
   flex-wrap: wrap;
   transition: all 0.4s ease-out;
 }
+
 .techs__list-item:hover {
   background-color: #3DDC84;
 }
@@ -76,4 +76,43 @@
 
 .techs__link:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 70px 50px 50px 70px;
+  }
+  .techs__caption {
+    margin: 75px 0 0 0;
+  }
+  .techs__list {
+    margin-top: 77px;
+  }
+  .techs__list-item {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs {
+    padding: 103px 18px 0 18px;
+  }
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .techs__caption {
+    margin: 64px 0 0 0;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .techs__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .techs__list {
+    margin-top: 45px;
+    flex-wrap: wrap;
+  }
 }

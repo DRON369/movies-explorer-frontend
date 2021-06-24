@@ -15,7 +15,7 @@
 }
 
 .header__logo {
-  background: url('../../images/logo.svg');
+  background: url('../../images/logo.svg') no-repeat center;
   display: block;
   width: 38px;
   height: 38px;
@@ -79,10 +79,29 @@
 }
 
 @media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
   .header__button {
     display: block;
   }
-  .header__links {
+  .header_auth>.header__links {
     display: none;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    padding: 18px 14px;
+  }
+  .header__link_signin {
+    width: 54px;
+    height: 26px;
+
+  }
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+    margin: 0 0 0 10px;
   }
 }

@@ -14,7 +14,8 @@
   background: rgba(0, 0, 0, 0.3);
   transform: translateX(0%);
 }
-.side-menu_opened > .side-menu__body {
+
+.side-menu_opened>.side-menu__body {
   transform: translateX(0%);
 }
 
@@ -95,4 +96,18 @@
   height: 30px;
   border-radius: 6px;
   margin-left: 13px;
+}
+
+@media screen and (max-width: 768px) {
+  .side-menu__link {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .side-menu__links {
+    max-height: 142px;
+  }
+  .side-menu__link_account {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
