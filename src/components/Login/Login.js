@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useHistory } from 'react-router';
 
 function Login() {
+   const history = useHistory();
+  function handleSubmit(event) {
+    event.preventDefault();
+    history.push("/movies");
+  }
   return (
     <div className="login">
-      <div className="login__logo"></div>
+      <Link to="/" className="login__logo"></Link>
       <h1 className="login__title">Рады видеть!</h1>
-      <form className="login__form" method="POST" name="login">
+      <form className="login__form" method="POST" name="login" onSubmit={handleSubmit}>
 
         <label className="login__label">E-mail
         <input
@@ -18,7 +24,7 @@ function Login() {
           minLength="2"
           maxLength="30"
           required
-          value="dron@ya.ru"
+          defaultValue="dron@ya.ru"
         />
         </label>
 
@@ -31,14 +37,13 @@ function Login() {
           name="password"
           autoComplete="off"
           required
-          value=""
         />
 
         </label>
         <span id="form-error" className="login__error">Что-то пошло не так...</span>
 
 
-        <button className="login__button" type="submit">
+        <button className="login__button" type="submit" aria-label="Войти в аккаунт">
           Войти
         </button>
       </form>

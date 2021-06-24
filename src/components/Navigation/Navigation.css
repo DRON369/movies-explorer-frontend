@@ -1,0 +1,50 @@
+.navigation {
+  font-family: Inter;
+  font-style: normal;
+}
+
+.navigation__links {
+  display: flex;
+}
+
+.navigation__link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFFFFF;
+  margin-left: 20px;
+  transition: opacity 0.4s ease-out;
+}
+
+.navigation__link:hover {
+  cursor: pointer;
+  opacity: 70%;
+}
+
+.navigation__link:last-of-type {
+  margin-left: 50px;
+}
+
+.navigation__link_active {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+
+.navigation__icon {
+  background: #313131;
+  background-image: url('../../images/account-icon.svg');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  margin-left: 13px;
+}
+

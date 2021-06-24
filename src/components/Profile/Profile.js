@@ -13,8 +13,8 @@ function Profile() {
         <p className="profile__field">dron@ya.ru</p>
       </div>
       <div className="profile__links">
-        <a className="profile__link" href="http://localhost:3000/profile">Редактировать</a>
-        <a className="profile__link profile__link_logout" href="http://localhost:3000/profile">Выйти из аккаунта</a>
+        <a className="profile__link" target="_blank" rel="noreferrer" href="http://localhost:3000/profile">Редактировать</a>
+        <a className="profile__link profile__link_logout" target="_blank" rel="noreferrer" href="http://localhost:3000/profile">Выйти из аккаунта</a>
       </div>
     </div>
   );

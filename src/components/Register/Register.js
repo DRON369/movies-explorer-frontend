@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Register() {
   return (
     <div className="register">
-      <div className="register__logo"></div>
+      <Link to="/" className="register__logo"></Link>
       <h1 className="register__title">Добро пожаловать!</h1>
       <form className="register__form" method="POST" name="register">
 
@@ -15,7 +15,7 @@ function Register() {
           type="text"
           name="username"
           required
-          value="Андрей"
+          defaultValue="Андрей"
         />
         </label>
 
@@ -30,7 +30,7 @@ function Register() {
           minLength="2"
           maxLength="30"
           required
-          value="dron@ya.ru"
+          defaultValue="dron@ya.ru"
         />
         </label>
 
@@ -43,7 +43,7 @@ function Register() {
           name="password"
           autoComplete="off"
           required
-          value="Qwe123"
+          defaultValue="Qwe123"
         />
 
         </label>

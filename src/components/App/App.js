@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -9,8 +10,16 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
 import { Route, Switch } from "react-router-dom";
+import SideMenu from '../SideMenu/SideMenu';
 
 function App() {
+
+  const [isSideMenuOpen, setSideMenuOpen] = useState(false);
+
+  function handleOpenSideMenuClick() {
+    setSideMenuOpen(!isSideMenuOpen);
+  }
+
   return (
     <div className="App">
       <div className="pageContainer">
@@ -18,26 +27,26 @@ function App() {
         <Switch>
 
           <Route exact path="/">
-            <Header />
+            <Header auth={false} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen}/>
             <Main />
             <Footer />
           </Route>
 
           <Route path="/movies">
-            <Header />
+            <Header auth={true} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen}/>
             <Movies />
             <Footer />
           </Route>
 
           <Route path="/saved-movies">
-            <Header />
+            <Header auth={true} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen}/>
             <SavedMovies />
             <Footer />
           </Route>
 
 
           <Route path="/profile">
-            <Header />
+            <Header auth={true} onOpenSideMenu={handleOpenSideMenuClick}/>
             <Profile />
           </Route>
 
@@ -54,7 +63,7 @@ function App() {
           </Route>
 
         </Switch>
-
+        <SideMenu isOpen={isSideMenuOpen} onOpenSideMenu={handleOpenSideMenuClick}/>
       </div>
     </div>
   );

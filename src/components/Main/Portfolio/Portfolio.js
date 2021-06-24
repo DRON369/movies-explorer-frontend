@@ -7,13 +7,13 @@ function Portfolio() {
       <nav>
         <ul className="portfolio__links">
           <li className="portfolio__link-item">
-            <a href ="http://localhost:3000/" className="portfolio__link">Статичный сайт<div className="portfolio__link-arrow"></div></a>
+            <a href ="https://dron369.github.io/how-to-learn/" className="portfolio__link" target="_blank" rel="noreferrer">Статичный сайт<div className="portfolio__link-arrow"></div></a>
           </li>
           <li className="portfolio__link-item">
-            <a href ="http://localhost:3000/" className="portfolio__link">Адаптивный сайт<div className="portfolio__link-arrow"></div></a>
+            <a href ="https://dron369.github.io/russian-travel/" className="portfolio__link" target="_blank" rel="noreferrer">Адаптивный сайт<div className="portfolio__link-arrow"></div></a>
           </li>
           <li className="portfolio__link-item">
-            <a href ="http://localhost:3000/" className="portfolio__link">Одностраничное приложение<div className="portfolio__link-arrow"></div></a>
+            <a href ="https://mesto369.nomoredomains.icu/" className="portfolio__link" target="_blank" rel="noreferrer">Одностраничное приложение<div className="portfolio__link-arrow"></div></a>
           </li>
         </ul>
       </nav>
