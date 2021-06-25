@@ -8,7 +8,7 @@ function AboutMe() {
       <h2 className="about-me__title">Студент</h2>
       <article className="about-me__information">
         <p className="about-me__name">Андрей</p>
-        <img className="about-me__avatar" src={Avatar} alt=""></img>
+        <img className="about-me__avatar" src={Avatar} alt="Фото Андрея"></img>
         <p className="about-me__profession">Фронтенд-разработчик, 29 лет</p>
         <p className="about-me__details">Я родился и живу в Заречном, Свердловской области, закончил факультет информатики РГППУ. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. После того, как прошёл курс по веб-разработке, не начал заниматься фриланс-заказами и не ушёл с постоянной работы.</p>
         <ul className="about-me__links">

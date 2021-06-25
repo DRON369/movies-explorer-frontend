@@ -13,7 +13,7 @@ function MoviesCard(props) {
 
   return (
     <li className="movies-card">
-      <img className="movies-card__image" alt="" src={props.image}></img>
+      <img className="movies-card__image" alt={props.alt} src={props.image}></img>
       <button className={ cardSaveButtonClassName } type="button" aria-label="Сохранить фильм в избранное" >{ isSaved ? '' : 'Сохранить'}</button>
       <div className="movies-card__body">
         <h2 className="movies-card__title">{props.title}</h2>
