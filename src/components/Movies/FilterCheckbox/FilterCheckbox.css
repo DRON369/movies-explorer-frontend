@@ -57,3 +57,7 @@
 .filter-checkbox__input:disabled:after {
   background: #F5F5F5;
 }
+
+.filter-checkbox__input:focus-visible {
+  outline: auto;
+}
