@@ -87,6 +87,7 @@
   }
   .techs__list {
     margin-top: 77px;
+    flex-wrap: wrap;
   }
   .techs__list-item {
     font-size: 12px;
@@ -94,7 +95,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
   .techs {
     padding: 103px 18px 0 18px;
   }
@@ -113,6 +114,5 @@
   }
   .techs__list {
     margin-top: 45px;
-    flex-wrap: wrap;
   }
 }

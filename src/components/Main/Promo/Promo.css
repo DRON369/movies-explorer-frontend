@@ -106,7 +106,13 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 615px) {
+  .promo__link {
+    margin: 44px auto 0 auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
   .promo {
     padding: 0 10px 0 10px;
     flex-direction: column;
@@ -122,7 +128,5 @@
     font-size: 30px;
     line-height: 38px;
   }
-  .promo__link {
-    margin: 44px auto 0 auto;
-  }
+
 }

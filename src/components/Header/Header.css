@@ -92,7 +92,7 @@
 
 @media screen and (max-width: 320px) {
   .header {
-    padding: 18px 14px;
+    margin: 0 auto;
   }
   .header__link_signin {
     width: 54px;

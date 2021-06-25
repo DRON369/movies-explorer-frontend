@@ -21,7 +21,8 @@
 .about-me__information {
   max-height: 327px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px ;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
   grid-template-rows: minmax(58px, max-content) minmax(20px, max-content) minmax(min-content, max-content) 1fr;
   margin: 66px 0 0 0;
 }
@@ -35,8 +36,10 @@
 }
 
 .about-me__avatar {
-  height: 327px;
-  border-radius: 10px;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 5%;
   grid-row: 1/5;
   grid-column: 2/3;
   justify-self: end;

@@ -6,7 +6,7 @@
   width: 100%;
   color: #FFF;
   margin: 0 auto;
-  padding: 70px 20px 70px 20px;
+
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
@@ -82,11 +82,10 @@
   color: #EE3465;
 }
 
-@media screen and (max-width: 768px) {
-  .profile {
-    padding: 230px 20px 70px 20px;
-  }
+@media screen and (max-width: 460px) {
+
   .profile__info {
+    width: 70%;
     margin-top: 67px;
   }
   .profile__links {
