@@ -1,0 +1,45 @@
+.error-page {
+  width: 100%;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  height: 395px;
+}
+
+.error-page__error-code {
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.error-page__error-message {
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #FFFFFF;
+  padding-top: 5px;
+}
+
+.error-page__link {
+  display: flex;
+  margin-top: auto;
+  justify-self: flex-end;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #4285F4;
+  text-decoration: none;
+  transition: opacity 0.4s ease-out;
+
+}
+
+.error-page__link:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
