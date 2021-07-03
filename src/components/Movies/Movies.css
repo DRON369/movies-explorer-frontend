@@ -5,10 +5,13 @@
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
-  font-size: 1rem;
-  line-height: 58px;
+  font-size: 15px;
+  line-height: 30px;
   color: #ffffff;
   text-align: center;
-  opacity: .5;
-  margin: 0 auto;
+  opacity: .7;
+  margin:  20px;
+  padding: 20px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }

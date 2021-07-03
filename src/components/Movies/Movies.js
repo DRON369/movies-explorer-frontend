@@ -15,11 +15,9 @@ function Movies() {
   const [searchMessage, setSearchMessage] = useState('');
 
   function searchHandler() {
-    getMovies();
-    const movies = JSON.parse(localStorage.getItem("movies"));
     let searchedMovies = [];
     for (let key in movies) {
-      if (movies[key].nameRU.includes(searchQuery)) {
+      if ((movies[key].nameRU).toLowerCase().includes(searchQuery.toLowerCase())) {
         searchedMovies.push(movies[key]);
       }
     }
@@ -32,12 +30,12 @@ function Movies() {
       .getMovies()
       .then((data) => {
         setMovies(data);
-        localStorage.setItem('movies', JSON.stringify(data))
-      }).then(() => {
-        setLoading(false)
+        localStorage.setItem('movies', JSON.stringify(data));
+        setLoading(false);
       })
       .catch((err) => {
-        setSearchMessage('При загрузке данных возникла ошибка :(')
+        setLoading(false);
+        setSearchMessage(`Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`)
         console.log(`При загрузке данных возникла ошибка: ${err.status}`)
       });
   }
@@ -48,14 +46,25 @@ function Movies() {
     } else if (movies.length > 0 && searchedMovies.length > 0) {
       setSearchMessage('');
     }
-  }, [movies.length, searchedMovies.length, searchQuery]);
+    // eslint-disable-next-line
+  }, [searchedMovies.length]);
 
   useEffect(() => {
     if (searchQuery === '') {
+      setLoading(false);
       setSearchMessage('Воспользуйтесь формой поиска фильма :)');
     }
   }, [searchQuery]);
 
+  useEffect(() => {
+    if (localStorage.getItem("movies")) {
+      setMovies(JSON.parse(localStorage.getItem("movies")));
+      setSearchedMovies(JSON.parse(localStorage.getItem("movies")));
+    } else {
+      getMovies();
+    }
+    setSearchMessage('Воспользуйтесь формой поиска фильма :)');
+  }, []);
 
   return (
     <div className="movies">

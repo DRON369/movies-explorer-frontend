@@ -1,9 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import CardImage1 from '../../../images/movies/33word-about-design.jpg';
 
 
 function MoviesCardList({ savedList, searchedMovies }) {
+
+  const [itemsToShow, setItemsToShow] = useState(0);
+  const [expandFeature, setExpandFeature] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [expandMovieCount, setExpandMovieCount] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    if (windowWidth >= 1280) {
+      setItemsToShow(12);
+      setExpandMovieCount(3);
+    }
+    if (windowWidth < 1280) {
+      setItemsToShow(8);
+      setExpandMovieCount(2);
+    }
+    if (windowWidth < 768) {
+      setItemsToShow(5);
+      setExpandMovieCount(1);
+    }
+  }, [searchedMovies.length, windowWidth])
+
+  useEffect(() => {
+    if (searchedMovies.length > itemsToShow) {
+      setExpandFeature(true);
+    } else {
+      setExpandFeature(false);
+    }
+  }, [itemsToShow, searchedMovies.length])
+
+  function showMoreHandler() {
+    setItemsToShow(itemsToShow + expandMovieCount);
+  }
+
   if (savedList) {
     return (
       <section className="movies-card-list">
@@ -24,7 +59,7 @@ function MoviesCardList({ savedList, searchedMovies }) {
     return (
       <section className="movies-card-list">
         <ul className="movies-card-list__list">
-          {searchedMovies.map((item) => (
+          {searchedMovies.slice(0, itemsToShow).map((item) => (
             <MoviesCard
               key={item.id}
               saved={false}
@@ -35,7 +70,11 @@ function MoviesCardList({ savedList, searchedMovies }) {
             />
           ))}
         </ul>
-        <button type="button" className="movies-card-list__button-more" aria-label="Отобразить дополнительные карточки с фильмами">Ещё</button>
+        {expandFeature && <button
+          type="button"
+          className="movies-card-list__button-more"
+          aria-label="Отобразить дополнительные карточки с фильмами"
+          onClick={showMoreHandler}>Ещё</button>}
       </section>
     );
   }
