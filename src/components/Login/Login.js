@@ -1,13 +1,24 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useHistory } from 'react-router';
+import { useState } from 'react';
 
-function Login() {
-   const history = useHistory();
-  function handleSubmit(event) {
-    event.preventDefault();
-    history.push("/movies");
-  }
+function Login(props) {
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+
+   function emailHandler(event) {
+     setEmail(event.target.value);
+   }
+
+   function passwordHandler(event) {
+     setPassword(event.target.value);
+   }
+
+   function handleSubmit(event) {
+     event.preventDefault();
+     props.onLogin({email, password});
+   }
+
   return (
     <div className="login">
       <Link to="/" className="login__logo"></Link>
@@ -24,7 +35,9 @@ function Login() {
           minLength="2"
           maxLength="30"
           required
-          defaultValue="dron@ya.ru"
+          placeholder="Введите email"
+          onChange={emailHandler}
+          value={email || ""}
         />
         </label>
 
@@ -37,10 +50,13 @@ function Login() {
           name="password"
           autoComplete="off"
           required
+          placeholder="Введите пароль"
+          onChange={passwordHandler}
+          value={password || ""}
         />
 
         </label>
-        <span id="form-error" className="login__error">Что-то пошло не так...</span>
+        <span id="form-error" className="login__error">{props.onError && 'Что-то пошло не так...'}</span>
 
 
         <button className="login__button" type="submit" aria-label="Войти в аккаунт">

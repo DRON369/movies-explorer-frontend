@@ -4,7 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import CardImage1 from '../../../images/movies/33word-about-design.jpg';
 
 
-function MoviesCardList({ savedList, searchedMovies }) {
+function MoviesCardList({ savedList, searchedMovies, onMovieSave }) {
 
   const [itemsToShow, setItemsToShow] = useState(0);
   const [expandFeature, setExpandFeature] = useState(true);
@@ -64,9 +64,17 @@ function MoviesCardList({ savedList, searchedMovies }) {
               key={item.id}
               saved={false}
               image={`https://api.nomoreparties.co${item.image.url}`}
+              trailerLink={item.trailerLink}
               title={item.nameRU}
-              duration={`${item.duration} минут`}
+              duration={item.duration}
               alt={`${item.image.alternativeText} && ${item.image.name}`}
+              onMovieSave={onMovieSave}
+              country={item.country}
+              director={item.director}
+              year={item.year}
+              description={item.description}
+              movieId={item.id}
+              nameEN={item.nameEN}
             />
           ))}
         </ul>

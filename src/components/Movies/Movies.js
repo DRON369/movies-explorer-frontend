@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 import Preloader from './Preloader/Preloader'
 
 function Movies() {
@@ -40,8 +41,12 @@ function Movies() {
       });
   }
 
+  function movieSave (props) {
+    mainApi.addMovieToSaved(props);
+  }
+
   useEffect(() => {
-    if (movies.length > 0 && searchedMovies.length === 0) {
+    if (searchedMovies.length === 0) {
       setSearchMessage('Ничего не найдено :(');
     } else if (movies.length > 0 && searchedMovies.length > 0) {
       setSearchMessage('');
@@ -71,7 +76,7 @@ function Movies() {
       <SearchForm setSearchQuery={setSearchQuery} searchHandler={searchHandler} />
       {loading && <Preloader />}
       {searchedMovies.length ? (
-        <MoviesCardList searchedMovies={searchedMovies} />
+        <MoviesCardList searchedMovies={searchedMovies} onMovieSave={movieSave}/>
       ) : ''}
       <p className="movies__caption">{searchMessage}</p>
     </div>

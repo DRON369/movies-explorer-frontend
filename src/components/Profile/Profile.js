@@ -1,20 +1,29 @@
 import React from 'react';
+import { UserContext } from '../contexts/CurrentUserContext';
+import { useContext } from 'react';
 
 
-function Profile() {
+function Profile(props) {
+
+  const currentUser = useContext(UserContext);
+
+  function logoutHandler () {
+    props.onLogout();
+  }
+
   return (
     <div className="profile">
-      <h1 className="profile__title">Привет, Андрей!</h1>
+      <h1 className="profile__title">Привет, {currentUser.name}!</h1>
       <div className="profile__info">
         <p className="profile__label">Иия</p>
-        <p className="profile__field">Андрей</p>
+        <p className="profile__field">{currentUser.name}</p>
         <div className="profile__line"></div>
         <p className="profile__label">E-mail</p>
-        <p className="profile__field">dron@ya.ru</p>
+        <p className="profile__field">{currentUser.email}</p>
       </div>
       <div className="profile__links">
         <a className="profile__link" target="_blank" rel="noreferrer" href="http://localhost:3000/profile">Редактировать</a>
-        <a className="profile__link profile__link_logout" target="_blank" rel="noreferrer" href="http://localhost:3000/profile">Выйти из аккаунта</a>
+        <button className="profile__link profile__link_logout" type="button" onClick={logoutHandler}>Выйти из аккаунта</button>
       </div>
     </div>
   );

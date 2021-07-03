@@ -11,36 +11,40 @@ class MainApi {
     }
   }
 
-  registration() {
+  registration({ name, email, password }) {
     return fetch(`${this._address}/signup`,
       {
         method: "POST",
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        })
       })
       .then(this._checkResponse);
   }
 
-  authorization() {
+  authorization(email, password) {
     return fetch(`${this._address}/signin`,
       {
         method: "POST",
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({ email, password }),
       })
       .then(this._checkResponse);
   }
 
-  getUserInfo() {
+  getUserInfo(jwt) {
     return fetch(`${this._address}/users/me`,
       {
         method: "GET",
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          authorization: `Bearer ${jwt}`,
           "Content-Type": "application/json",
         }
       })
@@ -59,14 +63,27 @@ class MainApi {
       .then(this._checkResponse);
   }
 
-  addMovieToSaved() {
+  addMovieToSaved({ country, director, duration, year, description, image, trailerLink, thumbnail, movieId, title, nameEN }) {
     return fetch(`${this._address}/movies`,
       {
         method: "POST",
         headers: {
-          authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          //authorization: `Bearer ${localStorage.getItem('jwt')}`,
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          country: country,
+          director: director,
+          duration: duration,
+          year: year,
+          description: description,
+          image: image,
+          trailer: trailerLink,
+          thumbnail: thumbnail,
+          movieId: movieId,
+          nameRU: title,
+          nameEN: nameEN
+        })
       })
       .then(this._checkResponse);
   }
@@ -98,7 +115,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: "https://api.movies369.nomoredomains.icu/",
+  address: "https://api.movies369.nomoredomains.icu",
 });
 
 export default mainApi;

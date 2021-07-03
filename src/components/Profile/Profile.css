@@ -60,6 +60,9 @@
 }
 
 .profile__link {
+  border: none;
+  background: transparent;
+  
   color: #FFF;
   text-decoration: none;
   font-weight: normal;
