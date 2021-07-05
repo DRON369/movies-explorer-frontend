@@ -41,8 +41,45 @@ function Movies() {
       });
   }
 
-  function movieSave (props) {
-    mainApi.addMovieToSaved(props);
+  function movieSave(props) {
+    if (props.saved) {
+      mainApi.removeMovieFromSaved(props.savedId)
+        .then(() => {
+          setMovies((state) =>
+            state.filter((currentMovie) => {
+              if (currentMovie.id === props.movieId) {
+                currentMovie.saved = false;
+              }
+              return currentMovie;
+            }));
+        })
+        .then(() => {
+          setSearchedMovies(movies);
+          localStorage.setItem('movies', JSON.stringify(movies));
+        })
+        .catch((err) =>
+          console.log(`При загрузке данных возникла ошибка: ${err.status}`)
+        );
+    } else {
+      mainApi.addMovieToSaved(props)
+        .then((res) => {
+          setMovies((state) =>
+            state.filter((currentMovie) => {
+              if (currentMovie.id === props.movieId) {
+                currentMovie.saved = true;
+                currentMovie.savedId = res._id;
+              }
+              return currentMovie;
+            }));
+        })
+        .then(() => {
+          setSearchedMovies(movies);
+          localStorage.setItem('movies', JSON.stringify(movies));
+        })
+        .catch((err) =>
+          console.log(`При загрузке данных возникла ошибка: ${err.status}`)
+        );
+    }
   }
 
   useEffect(() => {
@@ -58,6 +95,7 @@ function Movies() {
     if (searchQuery === '') {
       setLoading(false);
       setSearchMessage('Воспользуйтесь формой поиска фильма :)');
+      setSearchedMovies(movies);
     }
   }, [searchQuery]);
 
@@ -76,7 +114,7 @@ function Movies() {
       <SearchForm setSearchQuery={setSearchQuery} searchHandler={searchHandler} />
       {loading && <Preloader />}
       {searchedMovies.length ? (
-        <MoviesCardList searchedMovies={searchedMovies} onMovieSave={movieSave}/>
+        <MoviesCardList searchedMovies={searchedMovies} onMovieSave={movieSave} />
       ) : ''}
       <p className="movies__caption">{searchMessage}</p>
     </div>

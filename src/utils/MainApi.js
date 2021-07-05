@@ -68,7 +68,7 @@ class MainApi {
       {
         method: "POST",
         headers: {
-          //authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          authorization: `Bearer ${localStorage.getItem('jwt')}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({

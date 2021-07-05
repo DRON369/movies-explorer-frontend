@@ -115,7 +115,6 @@ function App() {
               <Footer />
             </Route>
 
-
             <Route path="/profile">
               <Header loggedIn={loggedIn} onOpenSideMenu={handleOpenSideMenuClick}  />
               <Profile onLogout={handleLogout} />
