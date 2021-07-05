@@ -63,9 +63,11 @@ function SavedMovies() {
         setSearchedSavedMovies(savedMovies);
       })
       .then(() => {
-        let localStorageMovies = (JSON.parse(localStorage.getItem('movies')));
+        const localStorageMovies = (JSON.parse(localStorage.getItem('movies')));
         localStorageMovies.filter((currentMovie) => {
-          if (currentMovie.movieId === props.savedId) {
+          if (currentMovie.savedId === props.movieId) {
+            console.log(currentMovie);
+            console.log(props);
             currentMovie.saved = false;
           }
           return currentMovie;
