@@ -7,13 +7,29 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import Preloader from './Preloader/Preloader'
 
-function Movies() {
+function Movies(props) {
 
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchMessage, setSearchMessage] = useState('');
+  const [shortMovies, setShortMovies] = useState(true);
+
+  function checkboxHandler(event) {
+    setShortMovies(!shortMovies);
+    if (shortMovies) {
+      let searchedMovies = [];
+      for (let key in movies) {
+        if (movies[key].duration <= 40) {
+          searchedMovies.push(movies[key]);
+        }
+      }
+      setSearchedMovies(searchedMovies);
+    } else {
+      setSearchedMovies(movies);
+    }
+  }
 
   function searchHandler() {
     let searchedMovies = [];
@@ -88,7 +104,6 @@ function Movies() {
     } else if (movies.length > 0 && searchedMovies.length > 0) {
       setSearchMessage('');
     }
-    // eslint-disable-next-line
   }, [searchedMovies.length]);
 
   useEffect(() => {
@@ -109,9 +124,11 @@ function Movies() {
     setSearchMessage('Воспользуйтесь формой поиска фильма :)');
   }, []);
 
+
+
   return (
     <div className="movies">
-      <SearchForm setSearchQuery={setSearchQuery} searchHandler={searchHandler} />
+      <SearchForm setSearchQuery={setSearchQuery} searchHandler={searchHandler} checkboxHandler={checkboxHandler} />
       {loading && <Preloader />}
       {searchedMovies.length ? (
         <MoviesCardList searchedMovies={searchedMovies} onMovieSave={movieSave} />

@@ -25,7 +25,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
 
-  const history = useHistory();
+    const history = useHistory();
 
   useEffect(() => {
     tokenCheck();
@@ -54,7 +54,7 @@ function App() {
 
   function handleLogin({ email, password }) {
     mainApi
-      .authorization(email, password)
+      .authorization({ email, password })
       .then((data) => {
         if (!data) throw new Error("Неверные имя пользователя или пароль");
         if (data.token) {
@@ -119,7 +119,7 @@ function App() {
               Footer={Footer}
               onOpenSideMenu={handleOpenSideMenuClick}
               isSideMenuOpen={isSideMenuOpen}
-            />
+             />
 
             <ProtectedRoute
               path="/saved-movies"

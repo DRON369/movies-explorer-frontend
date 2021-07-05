@@ -1,7 +1,7 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ savedList, setSearchQuery, searchHandler,  searchSavedHandler }) {
+function SearchForm({ savedList, setSearchQuery, searchHandler,  searchSavedHandler, checkboxHandler }) {
 
   function handleChangeSearchQuery(event) {
     setSearchQuery(event.target.value);
@@ -24,7 +24,7 @@ function SearchForm({ savedList, setSearchQuery, searchHandler,  searchSavedHand
           <input className="search-form__input" type="text" name="search-movie-name" placeholder="Фильм" required onChange={handleChangeSearchQuery}></input>
           <button className="search-form__button" type="submit">Найти</button>
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox checkboxHandler={checkboxHandler}/>
       </form>
 
     </div >

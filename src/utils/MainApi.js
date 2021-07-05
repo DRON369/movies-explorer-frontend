@@ -27,7 +27,7 @@ class MainApi {
       .then(this._checkResponse);
   }
 
-  authorization(email, password) {
+  authorization({email, password}) {
     return fetch(`${this._address}/signin`,
       {
         method: "POST",

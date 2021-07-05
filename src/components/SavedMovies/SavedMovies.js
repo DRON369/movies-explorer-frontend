@@ -15,6 +15,22 @@ function SavedMovies() {
   const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchMessage, setSearchMessage] = useState('');
+  const [shortMovies, setShortMovies] = useState(true);
+
+  function checkboxHandler(event) {
+    setShortMovies(!shortMovies);
+    if (shortMovies) {
+      let searchedMovies = [];
+      for (let key in savedMovies) {
+        if (savedMovies[key].duration <= 40) {
+          searchedMovies.push(savedMovies[key]);
+        }
+      }
+      setSearchedSavedMovies(searchedMovies);
+    } else {
+      setSearchedSavedMovies(savedMovies);
+    }
+  }
 
   const currentUser = useContext(UserContext);
 
@@ -108,6 +124,7 @@ function SavedMovies() {
         savedList={true}
         setSearchQuery={setSearchQuery}
         searchSavedHandler={searchSavedHandler}
+        checkboxHandler={checkboxHandler}
       />
       {loading && <Preloader />}
       {savedMovies.length ? (
