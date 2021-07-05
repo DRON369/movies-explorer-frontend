@@ -25,9 +25,10 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 44px 1px 50px;
+  grid-template-rows: 44px 1px 50px 1fr;
   margin-top: 91px;
   align-items: center;
+
 }
 
 .profile__line {
@@ -42,15 +43,28 @@
   color: #FFFFFF;
 }
 
-.profile__field {
+.profile__input {
+  max-width: 396px;
+  height: 46px;
+  width: 100%;
   font-weight: normal;
   font-size: 11px;
   line-height: 13px;
   text-align: right;
   color: #FFFFFF;
+  background: transparent;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 10px;
 }
 
-.profile__links {
+.profile__input_enabled {
+  border: 1px solid #424242;
+}
+
+.profile__buttons {
   height: 48px;
   display: flex;
   align-items: center;
@@ -59,26 +73,36 @@
   margin-top: auto;
 }
 
-.profile__link {
+.profile__button {
   border: none;
   background: transparent;
-  
+  grid-column: 1/3;
   color: #FFF;
   text-decoration: none;
   font-weight: normal;
   font-size: 13px;
   line-height: 16px;
   display: flex;
-  justify-self: flex-end;
+  justify-self: center;
   transition: opacity 0.4s ease-out;
 }
 
-.profile__link:hover {
-  cursor: pointer;
-  opacity: 0.7;
+.profile__button:disabled {
+  cursor: default;
+  opacity: 0.5;
+  color: #424242;
 }
 
-.profile__link_logout {
+.profile__button_hidden {
+  visibility: hidden;
+}
+
+.profile__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.profile__button_logout {
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -91,7 +115,7 @@
     width: 70%;
     margin-top: 67px;
   }
-  .profile__links {
+  .profile__buttons {
     margin-top: 190px;
   }
 }

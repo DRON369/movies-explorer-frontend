@@ -14,7 +14,8 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import ErrorPage from '../ErrorPage/ErrorPage';
-import SideMenu from '../SideMenu/SideMenu';
+import ProtectedRoute from '../ProtectedRoute';
+import SideMenu from '../SideMenu/SideMenu'
 
 function App() {
 
@@ -58,9 +59,23 @@ function App() {
         if (!data) throw new Error("Неверные имя пользователя или пароль");
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          tokenCheck();
-          history.push("/movies");
+          tokenCheck()
+            .then(() => {
+              history.push("/movies");
+            });
+
         }
+      })
+      .catch((err) =>
+        console.log(`При загрузке данных возникла ошибка: ${err.status}`)
+      );
+  }
+
+  function onEditUserInfo({ username, email }) {
+    mainApi
+      .updateUserInfo(username, email)
+      .then((data) => {
+        setCurrentUser({ id: data._id, email: data.email, name: data.name });
       })
       .catch((err) =>
         console.log(`При загрузке данных возникла ошибка: ${err.status}`)
@@ -70,7 +85,7 @@ function App() {
   const tokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       let jwt = localStorage.getItem("jwt");
-      mainApi
+      return mainApi
         .getUserInfo(jwt)
         .then((data) => {
           if (data._id) {
@@ -96,28 +111,41 @@ function App() {
       <div className="App">
         <div className="pageContainer">
           <Switch>
+            <ProtectedRoute
+              path="/movies"
+              loggedIn={loggedIn}
+              Header={Header}
+              Component={Movies}
+              Footer={Footer}
+              onOpenSideMenu={handleOpenSideMenuClick}
+              isSideMenuOpen={isSideMenuOpen}
+            />
+
+            <ProtectedRoute
+              path="/saved-movies"
+              loggedIn={loggedIn}
+              Header={Header}
+              Component={SavedMovies}
+              Footer={Footer}
+              onOpenSideMenu={handleOpenSideMenuClick}
+              isSideMenuOpen={isSideMenuOpen}
+            />
+
+            <ProtectedRoute
+              path="/profile"
+              loggedIn={loggedIn}
+              Header={Header}
+              Component={Profile}
+              Footer={Footer}
+              onOpenSideMenu={handleOpenSideMenuClick}
+              onLogout={handleLogout}
+              onEditUserInfo={onEditUserInfo}
+            />
 
             <Route exact path="/">
               <Header loggedIn={loggedIn} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen} />
               <Main />
               <Footer />
-            </Route>
-
-            <Route path="/movies">
-              <Header loggedIn={loggedIn} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen} />
-              <Movies />
-              <Footer />
-            </Route>
-
-            <Route path="/saved-movies">
-              <Header loggedIn={loggedIn} onOpenSideMenu={handleOpenSideMenuClick} isSideMenuOpen={isSideMenuOpen} />
-              <SavedMovies />
-              <Footer />
-            </Route>
-
-            <Route path="/profile">
-              <Header loggedIn={loggedIn} onOpenSideMenu={handleOpenSideMenuClick}  />
-              <Profile onLogout={handleLogout} />
             </Route>
 
             <Route path="/signup">

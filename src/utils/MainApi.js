@@ -51,14 +51,18 @@ class MainApi {
       .then(this._checkResponse);
   }
 
-  updateUserInfo() {
+  updateUserInfo(name, email) {
     return fetch(`${this._address}/users/me`,
       {
         method: "PATCH",
         headers: {
           authorization: `Bearer ${localStorage.getItem('jwt')}`,
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+        }),
       })
       .then(this._checkResponse);
   }
