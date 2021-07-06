@@ -43,6 +43,23 @@
   color: #FFFFFF;
 }
 
+.profile__error {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #EE3465;
+  text-align: center;
+  grid-column: 1/3;
+}
+.profile__message {
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #3DDC84;
+  text-align: center;
+  grid-column: 1/3;
+}
+
 .profile__input {
   max-width: 396px;
   height: 46px;
@@ -85,6 +102,11 @@
   display: flex;
   justify-self: center;
   transition: opacity 0.4s ease-out;
+}
+
+.profile__button_submit {
+  padding-top:30px;
+  box-sizing: content-box;
 }
 
 .profile__button:disabled {

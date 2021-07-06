@@ -4,10 +4,14 @@ import { useContext } from 'react';
 
 function Profile(props) {
 
+  const regEmail = "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$";
+
   const currentUser = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [editEnable, setEditEnable] = useState(false);
+  const [inputsError, setInputsError] = useState(false);
+  const [sendSuccesful, setSendSuccesful] = useState(false);
 
   function usernameHandler(event) {
     setUsername(event.target.value);
@@ -27,8 +31,16 @@ function Profile(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.onEditUserInfo({ username, email });
-    setEditEnable(false);
+    if (email && username && email.match(regEmail)!== null) {
+      props.onEditUserInfo({ username, email });
+      setEditEnable(false);
+      setInputsError(false);
+      setSendSuccesful(true);
+    }
+    else {
+      setSendSuccesful(false);
+      setInputsError(true);
+    }
   }
 
   useEffect(() => {
@@ -68,7 +80,9 @@ function Profile(props) {
           defaultValue={currentUser.email}
           disabled={!editEnable ? 'disabled' : ''}
         />
-        <button className={`profile__button ${!editEnable ? 'profile__button_hidden' : ''}`} type="submit" onClick={handleSubmit}>Готово</button>
+        <span className="profile__error">{inputsError && 'Введены некорректные данные :('}</span>
+        <span className="profile__message">{sendSuccesful && 'Успешно сохранено ^_^'}</span>
+        <button className={`profile__button profile__button_submit ${!editEnable ? 'profile__button_hidden' : ''}`} type="submit" onClick={handleSubmit}>Готово</button>
       </form>
 
       <div className="profile__buttons">
