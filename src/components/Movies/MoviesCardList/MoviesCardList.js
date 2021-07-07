@@ -3,6 +3,12 @@ import { useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { UserContext } from '../../contexts/CurrentUserContext';
 import { useContext } from 'react';
+import { MOVIES_COUNT_DESKTOP } from '../../../constants';
+import { EXPAND_MOVIES_COUNT_DESKTOP } from '../../../constants';
+import { MOVIES_COUNT_TABLET } from '../../../constants';
+import { EXPAND_MOVIES_COUNT_TABLET } from '../../../constants';
+import { MOVIES_COUNT_PHONE } from '../../../constants';
+import { EXPAND_MOVIES_COUNT_PHONE } from '../../../constants';
 
 
 function MoviesCardList({
@@ -22,16 +28,16 @@ function MoviesCardList({
   useEffect(() => {
     setWindowWidth(window.innerWidth);
     if (windowWidth >= 1280) {
-      setItemsToShow(12);
-      setExpandMovieCount(3);
+      setItemsToShow(MOVIES_COUNT_DESKTOP);
+      setExpandMovieCount(EXPAND_MOVIES_COUNT_DESKTOP);
     }
     if (windowWidth < 1280) {
-      setItemsToShow(8);
-      setExpandMovieCount(2);
+      setItemsToShow(MOVIES_COUNT_TABLET);
+      setExpandMovieCount(EXPAND_MOVIES_COUNT_TABLET);
     }
     if (windowWidth < 768) {
-      setItemsToShow(5);
-      setExpandMovieCount(1);
+      setItemsToShow(MOVIES_COUNT_PHONE);
+      setExpandMovieCount(EXPAND_MOVIES_COUNT_PHONE);
     }
   }, [searchedMovies.length, windowWidth])
 

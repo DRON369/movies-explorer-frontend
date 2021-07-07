@@ -6,6 +6,7 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import Preloader from './Preloader/Preloader'
+import { SHORT_MOVIE_DURATION } from '../../constants';
 
 function Movies() {
 
@@ -90,7 +91,7 @@ function Movies() {
   useEffect(() => {
     const result = [];
     for (const key in allMovies) {
-      if (allMovies[key].duration <= 40) {
+      if (allMovies[key].duration <= SHORT_MOVIE_DURATION) {
         result.push(allMovies[key]);
       }
     }

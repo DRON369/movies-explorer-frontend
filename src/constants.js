@@ -1,0 +1,7 @@
+export const MOVIES_COUNT_DESKTOP = 12;
+export const EXPAND_MOVIES_COUNT_DESKTOP = 3;
+export const MOVIES_COUNT_TABLET = 8;
+export const EXPAND_MOVIES_COUNT_TABLET = 2;
+export const MOVIES_COUNT_PHONE = 5;
+export const EXPAND_MOVIES_COUNT_PHONE = 1;
+export const SHORT_MOVIE_DURATION = 40;

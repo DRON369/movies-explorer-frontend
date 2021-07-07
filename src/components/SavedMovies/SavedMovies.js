@@ -7,6 +7,7 @@ import mainApi from '../../utils/MainApi';
 import Preloader from '../Movies/Preloader/Preloader';
 import { UserContext } from '../contexts/CurrentUserContext';
 import { useContext } from 'react';
+import { SHORT_MOVIE_DURATION } from '../../constants';
 
 function SavedMovies() {
 
@@ -87,14 +88,14 @@ function SavedMovies() {
           )
         );
         setShortSavedMovies((state) =>
-        state.filter((currentMovie) => {
-          if (currentMovie._id === delMovie._id) {
-            return '';
+          state.filter((currentMovie) => {
+            if (currentMovie._id === delMovie._id) {
+              return '';
+            }
+            return currentMovie;
           }
-          return currentMovie;
-        }
-        )
-      );
+          )
+        );
       })
       .then(() => {
         const localStorageMovies = (JSON.parse(localStorage.getItem('movies')));
@@ -126,7 +127,7 @@ function SavedMovies() {
       setLoading(false);
       setSearchMessage('Воспользуйтесь формой поиска фильма :)');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   useEffect(() => {
@@ -138,7 +139,7 @@ function SavedMovies() {
   useEffect(() => {
     const result = [];
     for (const key in savedMovies) {
-      if (savedMovies[key].duration <= 40) {
+      if (savedMovies[key].duration <= SHORT_MOVIE_DURATION) {
         result.push(savedMovies[key]);
       }
     }
