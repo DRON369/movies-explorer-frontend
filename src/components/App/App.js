@@ -21,6 +21,7 @@ function App() {
 
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
   const [regError, setRegError] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [loginError, setLoginError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState('');
@@ -30,6 +31,13 @@ function App() {
   useEffect(() => {
     tokenCheck();
   }, []);
+
+  useEffect(() => {
+    if (loggedIn) {
+      history.push("/movies");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
 
   function handleOpenSideMenuClick() {
     setSideMenuOpen(!isSideMenuOpen);
@@ -105,6 +113,17 @@ function App() {
     setCurrentUser('');
     history.push("/");
   }
+
+  useEffect(() => {
+    mainApi
+      .getUserInfo(localStorage.getItem("jwt"))
+      .then((user) => {
+        setCurrentUser(user);
+      })
+      .catch((err) =>
+        console.log(`При загрузке данных возникла ошибка: ${err.status}`)
+      );
+  }, [loggedIn]);
 
   return (
     <UserContext.Provider value={currentUser}>

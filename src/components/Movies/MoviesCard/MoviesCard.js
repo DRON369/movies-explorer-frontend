@@ -1,9 +1,6 @@
 import React from 'react';
-import { useEffect } from 'react';
-
 
 function MoviesCard(props) {
-
 
   function getTimeFromMins(mins) {
     let hours = Math.trunc(mins / 60);

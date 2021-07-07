@@ -10,39 +10,20 @@ import { useContext } from 'react';
 
 function SavedMovies() {
 
-  const [loading, setLoading] = useState(false);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [searchedSavedMovies, setSearchedSavedMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchMessage, setSearchMessage] = useState('');
-  const [shortMovies, setShortMovies] = useState(true);
+  //const [allMovies, setAllMovies] = useState([]);
 
-  function checkboxHandler(event) {
-    setShortMovies(!shortMovies);
-    if (shortMovies) {
-      let searchedMovies = [];
-      for (let key in savedMovies) {
-        if (savedMovies[key].duration <= 40) {
-          searchedMovies.push(savedMovies[key]);
-        }
-      }
-      setSearchedSavedMovies(searchedMovies);
-    } else {
-      setSearchedSavedMovies(savedMovies);
-    }
-  }
+  const [shortSavedMovies, setShortSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
+  const [shortMoviesToggle, setShortMoviesToggle] = useState(false);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchedMovies, setSearchedMovies] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [searchMessage, setSearchMessage] = useState('');
 
   const currentUser = useContext(UserContext);
-
-  function searchSavedHandler() {
-    let searchedMovies = [];
-    for (let key in savedMovies) {
-      if ((savedMovies[key].nameRU).toLowerCase().includes(searchQuery.toLowerCase())) {
-        searchedMovies.push(savedMovies[key]);
-      }
-    }
-    setSearchedSavedMovies(searchedMovies);
-  }
 
   function getSavedMovies() {
     setLoading(true);
@@ -50,17 +31,37 @@ function SavedMovies() {
       .getSavedMovies()
       .then((data) => {
         const userMovies = data.filter((currentMovie) =>
-          currentMovie.owner === currentUser.id ? currentMovie : ''
+          currentMovie.owner === currentUser._id ? currentMovie : ''
         )
         setSavedMovies(userMovies);
-        setSearchedSavedMovies(userMovies);
+        setSearchedMovies(userMovies);
         setLoading(false);
+        setSearchMessage('Воспользуйтесь формой поиска фильма :)');
       })
       .catch((err) => {
         setLoading(false);
         setSearchMessage(`Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.`)
         console.log(`При загрузке данных возникла ошибка: ${err.status}`)
       });
+  }
+
+  function searchHandler() {
+    if (shortMoviesToggle) {
+      setSearchedMovies(searchMovies(shortSavedMovies));
+    } else {
+      setSearchedMovies(searchMovies(savedMovies));
+    }
+  }
+
+  function searchMovies(movies) {
+    let result = [];
+    for (let key in movies) {
+      if ((movies[key].nameRU).toLowerCase().includes(searchQuery.toLowerCase())) {
+        result.push(movies[key]);
+      }
+    }
+    setLoading(false);
+    return result;
   }
 
   function movieRemove(props) {
@@ -76,19 +77,34 @@ function SavedMovies() {
           }
           )
         );
-        setSearchedSavedMovies(savedMovies);
+        setSearchedMovies((state) =>
+          state.filter((currentMovie) => {
+            if (currentMovie._id === delMovie._id) {
+              return '';
+            }
+            return currentMovie;
+          }
+          )
+        );
       })
       .then(() => {
         const localStorageMovies = (JSON.parse(localStorage.getItem('movies')));
         localStorageMovies.filter((currentMovie) => {
           if (currentMovie.savedId === props.movieId) {
-            console.log(currentMovie);
-            console.log(props);
             currentMovie.saved = false;
           }
           return currentMovie;
         })
         localStorage.setItem('movies', JSON.stringify(localStorageMovies));
+
+        const localStorageSearchedMovies = (JSON.parse(localStorage.getItem('searched-movies')));
+        localStorageSearchedMovies.filter((currentMovie) => {
+          if (currentMovie.savedId === props.movieId) {
+            currentMovie.saved = false;
+          }
+          return currentMovie;
+        })
+        localStorage.setItem('searched-movies', JSON.stringify(localStorageSearchedMovies));
       })
       .catch((err) =>
         console.log(`При загрузке данных возникла ошибка: ${err.status}`)
@@ -96,41 +112,59 @@ function SavedMovies() {
   }
 
   useEffect(() => {
+    if (searchQuery === '') {
+      setSearchedMovies(savedMovies);
+      setLoading(false);
+      setSearchMessage('Воспользуйтесь формой поиска фильма :)');
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
     getSavedMovies();
+    setSearchMessage('Вы не добавили в избранное ни одного фильма!');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (searchedSavedMovies.length === 0) {
+    let result = [];
+    for (let key in savedMovies) {
+      if (savedMovies[key].duration <= 40) {
+        result.push(savedMovies[key]);
+      }
+    }
+    setShortSavedMovies(result);
+  }, [savedMovies])
+
+  useEffect(() => {
+    if (searchedMovies.length === 0 && searchQuery.length > 0) {
       setSearchMessage('Ничего не найдено :(');
-    } else if (savedMovies.length > 0 && searchedSavedMovies.length > 0) {
+    } else if (searchedMovies.length > 0) {
       setSearchMessage('');
     }
-  }, [searchedSavedMovies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchedMovies]);
 
   useEffect(() => {
-    if (searchQuery === '' && searchedSavedMovies.length === 0) {
-      setLoading(false);
-      setSearchMessage(`Вы не добавили в избранное ни одного фильма!`);
+    if (searchedMovies.length !== 0) {
+      searchHandler();
     }
-  }, [searchQuery, searchedSavedMovies]);
-
-  useEffect(() => {
-    setSearchedSavedMovies(savedMovies);
-  }, [savedMovies]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shortMoviesToggle]);
 
   return (
     <div className="saved-movies">
       <SearchForm
-        savedList={true}
         setSearchQuery={setSearchQuery}
-        searchSavedHandler={searchSavedHandler}
-        checkboxHandler={checkboxHandler}
+        searchSavedHandler={searchMovies}
+        searchHandler={searchHandler}
+        shortMoviesToggle={shortMoviesToggle}
+        setShortMoviesToggle={setShortMoviesToggle}
       />
       {loading && <Preloader />}
       {savedMovies.length ? (
         <section className="movies-card-list">
           <ul className="movies-card-list__list">
-            {searchedSavedMovies.map((item) => (
+            {searchedMovies.map((item) => (
               <MoviesCard
                 key={item._id}
                 saved={item.saved}

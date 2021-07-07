@@ -5,13 +5,18 @@ import { UserContext } from '../../contexts/CurrentUserContext';
 import { useContext } from 'react';
 
 
-function MoviesCardList({ savedList, searchedMovies, onMovieSave, onMovieRemove }) {
+function MoviesCardList({
+  searchedMovies,
+  onMovieSave,
+  onMovieRemove
+}) {
 
   const [itemsToShow, setItemsToShow] = useState(0);
   const [expandFeature, setExpandFeature] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [expandMovieCount, setExpandMovieCount] = useState(0);
 
+  // eslint-disable-next-line no-unused-vars
   const currentUser = useContext(UserContext);
 
   useEffect(() => {
@@ -47,24 +52,23 @@ function MoviesCardList({ savedList, searchedMovies, onMovieSave, onMovieRemove 
       <ul className="movies-card-list__list">
         {searchedMovies.slice(0, itemsToShow).map((item) => (
           <MoviesCard
-            key={savedList ? item._id : item.id}
+            key={item.id}
             saved={item.saved}
             savedId={item.savedId}
-            image={savedList ? `${item.image}` : `https://api.nomoreparties.co${item.image.url}`}
-            thumbnail={savedList ? `${item.image}` : `https://api.nomoreparties.co${item.image.formats.thumbnail.url}`}
+            image={`https://api.nomoreparties.co${item.image.url}`}
+            thumbnail={`https://api.nomoreparties.co${item.image.formats.thumbnail.url}`}
             trailerLink={item.trailerLink}
             title={item.nameRU}
             duration={item.duration}
             alt={`${item.image.alternativeText} && ${item.image.name}`}
             onMovieSave={onMovieSave}
             onMovieRemove={onMovieRemove}
-            country={item.country}
+            country={`${item.country} && ${''}`}
             director={item.director}
             year={item.year}
             description={item.description}
-            movieId={savedList ? item._id : item.id}
-            nameEN={item.nameEN}
-            savedList={savedList}
+            movieId={item.id}
+            nameEN={`${item.nameEN} && ${''}`}
           />
         ))}
       </ul>

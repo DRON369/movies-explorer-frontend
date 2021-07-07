@@ -4,6 +4,7 @@ import { useContext } from 'react';
 
 function Profile(props) {
 
+  // eslint-disable-next-line no-useless-escape
   const regEmail = "^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$";
 
   const currentUser = useContext(UserContext);
@@ -46,6 +47,7 @@ function Profile(props) {
   useEffect(() => {
     setUsername(currentUser.email);
     setEmail(currentUser.name);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
