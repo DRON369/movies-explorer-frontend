@@ -92,7 +92,7 @@ function App() {
 
   const tokenCheck = () => {
     if (localStorage.getItem("jwt")) {
-      let jwt = localStorage.getItem("jwt");
+      const jwt = localStorage.getItem("jwt");
       return mainApi
         .getUserInfo(jwt)
         .then((data) => {
@@ -108,6 +108,9 @@ function App() {
   };
 
   function handleLogout() {
+    localStorage.removeItem("movies");
+    localStorage.removeItem("saved-movies");
+    localStorage.removeItem("searched-movies");
     localStorage.removeItem("jwt");
     setLoggedIn(false);
     setCurrentUser('');

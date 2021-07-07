@@ -54,8 +54,8 @@ function SavedMovies() {
   }
 
   function searchMovies(movies) {
-    let result = [];
-    for (let key in movies) {
+    const result = [];
+    for (const key in movies) {
       if ((movies[key].nameRU).toLowerCase().includes(searchQuery.toLowerCase())) {
         result.push(movies[key]);
       }
@@ -86,6 +86,15 @@ function SavedMovies() {
           }
           )
         );
+        setShortSavedMovies((state) =>
+        state.filter((currentMovie) => {
+          if (currentMovie._id === delMovie._id) {
+            return '';
+          }
+          return currentMovie;
+        }
+        )
+      );
       })
       .then(() => {
         const localStorageMovies = (JSON.parse(localStorage.getItem('movies')));
@@ -117,6 +126,7 @@ function SavedMovies() {
       setLoading(false);
       setSearchMessage('Воспользуйтесь формой поиска фильма :)');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   useEffect(() => {
@@ -126,8 +136,8 @@ function SavedMovies() {
   }, []);
 
   useEffect(() => {
-    let result = [];
-    for (let key in savedMovies) {
+    const result = [];
+    for (const key in savedMovies) {
       if (savedMovies[key].duration <= 40) {
         result.push(savedMovies[key]);
       }

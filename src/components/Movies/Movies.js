@@ -43,10 +43,8 @@ function Movies() {
 
   function searchHandler() {
     if (allMovies.length === 0) {
-      console.log(allMovies.length === 0);
       setAllMovies(JSON.parse(localStorage.getItem("movies")));
     }
-    console.log(allMovies);
     if (shortMoviesToggle) {
       setSearchedMovies(searchMovies(shortMovies));
     } else {
@@ -55,8 +53,8 @@ function Movies() {
   }
 
   function searchMovies(movies) {
-    let result = [];
-    for (let key in movies) {
+    const result = [];
+    for (const key in movies) {
       if ((movies[key].nameRU).toLowerCase().includes(searchQuery.toLowerCase())) {
         result.push(movies[key]);
       }
@@ -90,8 +88,8 @@ function Movies() {
   }, []);
 
   useEffect(() => {
-    let result = [];
-    for (let key in allMovies) {
+    const result = [];
+    for (const key in allMovies) {
       if (allMovies[key].duration <= 40) {
         result.push(allMovies[key]);
       }
