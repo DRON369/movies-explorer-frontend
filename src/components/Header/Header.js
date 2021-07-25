@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 
 
 function Header(props) {
-  const isAuth = props.auth;
+  const isAuth = props.loggedIn;
   if (isAuth) {
     return (
       <header className="header header_auth">
@@ -12,13 +12,17 @@ function Header(props) {
         <nav className="header__links">
           <Navigation />
         </nav>
-        <button className={`header__button ${props.isSideMenuOpen ? 'header__button_close' : ''}`} type="button" aria-label="Открыть меню" onClick={props.onOpenSideMenu}></button>
+        <button
+          className={`header__button ${props.isSideMenuOpen ? 'header__button_close' : ''}`}
+          type="button" aria-label="Открыть меню"
+          onClick={props.onOpenSideMenu}>
+        </button>
       </header>
     );
   }
   else {
     return (
-      <header className="header header"  style={{backgroundColor: "#073042"}}>
+      <header className="header header" style={{ backgroundColor: "#073042" }}>
         <Link to="/" className="header__logo"></Link>
         <nav className="header__links">
           <Link to="/signup" className="header__link">Регистрация</Link>

@@ -12,9 +12,10 @@
   border-radius: 6px;
   cursor: pointer;
   object-fit: contain;
+  width: 100%;
 }
 
-.movies-card__image:hover+.movies-card__save-button {
+.movies-card__link:hover+.movies-card__save-button {
   cursor: pointer;
   opacity: 1;
 }
