@@ -3,8 +3,6 @@
 
 Фронтенд дипломного проекта `Movies369`.
 
-Адрес приложения - [movies369.nomoredomains.club](https://movies369.nomoredomains.club/)
-
-Публичный ip адресс сервера - [178.154.225.202](178.154.225.202)
+Адрес приложения - [movies.dron369.ru](https://movies.dron369.ru/)
 
 
