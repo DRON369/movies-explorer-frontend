@@ -119,7 +119,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  address: "https://api.movies369.nomoredomains.icu",
+  address: "https://api.movies.dron369.ru/",
 });
 
 export default mainApi;
