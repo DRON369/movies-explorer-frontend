@@ -40,7 +40,7 @@
 
 .header__link:hover {
   cursor: pointer;
-  opacity: 70%;
+  opacity: 0.7;
 }
 
 .header__link_signin {
@@ -75,7 +75,7 @@
 .header__button:hover {
   transition: all 0.4s ease-out;
   cursor: pointer;
-  opacity: 80%;
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {

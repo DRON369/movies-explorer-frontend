@@ -13,7 +13,7 @@ function Portfolio() {
             <a href ="https://dron369.github.io/russian-travel/" className="portfolio__link" target="_blank" rel="noreferrer">Адаптивный сайт<div className="portfolio__link-arrow"></div></a>
           </li>
           <li className="portfolio__link-item">
-            <a href ="https://mesto369.nomoredomains.icu/" className="portfolio__link" target="_blank" rel="noreferrer">Одностраничное приложение<div className="portfolio__link-arrow"></div></a>
+            <a href ="https://mesto.dron369.ru/" className="portfolio__link" target="_blank" rel="noreferrer">Одностраничное приложение<div className="portfolio__link-arrow"></div></a>
           </li>
         </ul>
       </nav>
